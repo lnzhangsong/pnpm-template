@@ -1,1 +1,1 @@
-# npm-template
+# pnpm-template
