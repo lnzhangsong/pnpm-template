@@ -1,0 +1,63 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add cz-conventional-changelog --dev --exact
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\nif\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Tencent\微信web开发者工具\dll;%NVM_HOME%;%NVM_SYMLINK%;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Users\nif\AppData\Local\Microsoft\WindowsApps;C:\Users\nif\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\nif\AppData\Local\GitHubDesktop\bin;C:\Users\nif\AppData\Roaming\nvm;C:\Program Files\nodejs
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  14.18.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\nif\AppData\Local\Yarn\Cache\v6\npm-supports-color-9.2.1-599dc9d45acf74c6176e0d880bab1d7d718fe891-integrity\node_modules\supports-color\browser.d.ts' -> 'C:\Users\nif\Documents\GitHub\pnpm_test\node_modules\lint-staged\node_modules\supports-color\browser.d.ts'
+
+npm manifest: 
+  {
+    "name": "pnpm_test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "lint-staged": "lint-staged",
+      "cz": "git-cz"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "@typescript-eslint/eslint-plugin": "^5.14.0",
+      "@typescript-eslint/parser": "^5.14.0",
+      "commitizen": "^4.2.4",
+      "eslint": "^8.10.0",
+      "eslint-config-airbnb-base": "^15.0.0",
+      "eslint-plugin-import": "^2.25.4",
+      "husky": "^7.0.4",
+      "lint-staged": "^12.3.5",
+      "prettier": "^2.5.1"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged",
+        "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+        "prepare": "husky install",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx"
+      }
+    },
+    "lint-staged": {
+      "*.{js,jsx,tsx}": [
+        "prettier --write",
+        "eslint --cache --fix",
+        "git add"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
