@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:service": "pnpm start --filter service",
-    "start:render": "pnpm start --filter render",
+    "start:service": "pnpm --filter service start",
+    "start:render": "pnpm --filter render start",
     "lint-staged": "lint-staged",
     "cz": "git-cz"
   },
