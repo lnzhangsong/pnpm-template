@@ -3,38 +3,43 @@ import cors from "koa2-cors";
 import Logger from "koa-logger";
 import router from "./router";
 
-const app: Koa = new Koa();
+class App extends Koa {
+	constructor(port: number) {
+		super();
 
-// Generic error handling middleware.
-app.use(async (ctx: Context, next: () => Promise<any>) => {
-	try {
-		await next();
-	} catch (error) {
-		ctx.body = { error };
-		ctx.app.emit("error", error, ctx);
+		// logger
+		const logger = Logger();
+		this.use(logger);
+
+
+		// Generic error handling middleware.
+		this.use(async (ctx: Context, next: () => Promise<any>) => {
+			try {
+				await next();
+			} catch (error) {
+				ctx.body = { error };
+				ctx.app.emit("error", error, ctx);
+			}
+		});
+
+		// cors
+		this.use(cors({
+			origin: "*",
+			allowMethods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+			allowHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With", "X-Custom-Header", "Origin", "Referer", "User-Agent", "Cookie"],
+		}));
+
+		// router
+		this.use(router.routes());
+		this.use(router.allowedMethods({
+			throw: true, // replace response header
+		}));
+
+		// Application error logging.
+		this.on("error", console.error);
+
+		this.listen(port);
 	}
-});
+}
 
-// cors
-app.use(cors({
-	origin: "*",
-	allowMethods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
-	allowHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With", "X-Custom-Header", "Origin", "Referer", "User-Agent", "Cookie"],
-}));
-
-// logger
-const logger = Logger();
-app.use(logger);
-
-// router
-app.use(router.routes());
-app.use(router.allowedMethods({
-	throw: true, // replace response header
-}));
-
-// Application error logging.
-app.on("error", console.error);
-
-app.listen(10086);
-
-export default app;
+export default App;
